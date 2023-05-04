@@ -1,0 +1,285 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+  <a href="/" style="font-weight:bold;font-size: 30px;font-family:Georgia, serif;color:rgba(0, 100, 0); margin:20px;display: block; margin-top: 10px;">Green Guard</a>
+  <!-- Required meta tags -->
+    
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+
+
+
+
+</head>
+
+<style>
+  body{
+    margin:0px;
+    padding: 0px;
+    align-items:end;
+    background-image: url('static/ind7.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .container {
+    max-width: 100%;
+    margin: 0 auto;
+    
+  }
+
+  
+  
+  .sec{
+    border:5 px solid rgb(13, 13, 13);
+    border-radius: 50px;
+    
+    padding: 2px;
+    font-size: 20px;
+  }
+  .sec::-webkit-file-upload-button{
+    color: #fff;
+    background-image: linear-gradient(30deg,rgb(18, 161, 106),rgb(56, 126, 26));
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+
+
+
+  .submit-button {
+    background-color: rgb(10, 155, 10);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+
+  .col
+{
+  font-family: 'Georgia, serif';
+   
+  background-image: linear-gradient(
+    -225deg,
+    #057731f8 0%,
+    #087c04f2 29%,
+    #05802e 67%,
+    #bcc205 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2.5s linear infinite;
+  display: inline-block;
+      font-size: 190px;
+}
+
+.col1
+{
+  font-family: 'Georgia, serif';
+   
+  background-image: linear-gradient(
+    -225deg,
+    #031700fd 0%,
+    #010800f2 29%,
+    #0b2501da 67%,
+    #a5c311 100%
+  );
+  background-size: auto auto;
+  background-clip: border-box;
+  background-size: 200% auto;
+  color: #fff;
+  background-clip: text;
+  /* text-fill-color: transparent; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: textclip 2.5s linear infinite;
+  display: inline-block;
+      font-size: 190px;
+}
+@keyframes textclip {
+  to {
+    background-position: 200% center;
+  }
+
+  
+}
+</style>
+
+<body>
+  <div class="container">
+
+    <center><h3 style="font-weight:bold;font-size:18px;font-family: 'Montserrat', sans-serif;">Important note: Our website provides predictions on plant leaf diseases based on the symptoms observed. While we strive to provide accurate information, these predictions are just that - predictions. We highly recommend that you verify the diagnosis with a plant specialist or a laboratory test before taking any action. Remember, prevention is always better than cure. Happy farming!</h3></center>
+
+    <div class="col-lg-12">
+      <center><h1 class="col" style="padding:12px;font-weight: 600 !important;font-size: 3.2em">PLANT DISEASE PREDICTION</h1></center>
+    </div>
+
+    <center><h2 class="col" style="font-size: 2.0em"><b>Click on 'Choose File' button to upload a clear image of the Plant Leaf you want to check and then click 'Predict' button</b></h2></center>
+    <br>
+
+    <div>
+      <div >
+        <center ><form  class="form-inline" action = "/predict" method = "post" enctype="multipart/form-data">
+            <input id="file" class="sec" type="file" name="file" onchange="return fileValidation()"/><br>
+            <input type = "submit" class="submit-button" value="Predict">
+        </form></center>
+      </div>
+      </div>
+
+      <div id="imagePreview"></div>
+    <script>
+        function fileValidation() {
+            var fileInput =
+                document.getElementById("file");
+             
+            var filePath = fileInput.value;
+         
+            // Allowing file type
+            var allowedExtensions =
+                    /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+             
+            if (!allowedExtensions.exec(filePath)) {
+                alert('Invalid file type');
+                fileInput.value = '';
+                return false;
+            }
+           
+        }
+    </script>
+
+    <br>
+    <br>
+
+    <div style="display: flex;padding-top:30px">
+
+      <span class="border border-primary">
+        <img src="{{ user_image }}" alt="User Image" class="img-thumbnail" style="width:250px;height:250px;margin-left: 20px; margin-right: 20px">
+      </span>
+
+
+      <div>
+
+      <h3 style="font-weight:bold;font-size:25px;font-family:Georgia, serif">Disease name : <mark style="background-color:#04aa6d;color:white;border-radius:6px">{{d}}</mark></h4>
+      <br>
+      
+      <!--{% if d!="Healthy" %}
+      <h4 style="font-weight:bold;font-size:25px;font-family: Georgia, serif">Translated Disease name : <mark style="background-color:#04aa6d;color:white;border-radius:6px">{{d_kannada}}</mark></h4>
+      {% endif %}-->
+      
+  
+      <h3 style="font-weight:bold;font-size:25px;font-family: Georgia, serif">Probability : {{prob}} %</h4>
+      <br>
+      
+    <!--
+      <h3 class="col1" style="font-size: 1.8em"><b>Navigate between ಕನ್ನಡ and English tabs to see Remedies and Information about disease in Kannada and English languages.</b></h4>
+      -->
+      
+      <br>
+      <br>
+
+      <style>
+        button {
+          display: inline-block;
+          background-color: rgb(10, 155, 10);
+          color: white;
+          border: none;
+          border-radius: 10px;
+          padding: 10px 20px;
+          font-size: 20px;
+          cursor: pointer;
+          margin-right: 10px;
+        }
+      </style>
+      
+        
+        <button  id="translate-button" type="submit">ಕನ್ನಡ</button>
+        <button id="translate-button-english" type="submit">English</button>
+       
+     
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+          $(document).ready(function() {
+            $('#translate-button').click(function() {
+              $('h4').each(function() {
+                var heading = $(this);
+                var textToTranslate = heading.text();
+                var lang = 'kn';
+                $.ajax({
+                  url: '/translate',
+                  type: 'POST',
+                  data: {'text': textToTranslate, 'lang': lang},
+                  success: function(response) {
+                    var translatedText = response.result; // get the translated text from the response
+                    heading.text(translatedText); // update the text of the heading with the translated text
+                  },
+                  error: function(xhr, status, error) {
+                    console.log('Error:', error);
+                  }
+                });
+              });
+            });
+          });
+        </script>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+          $(document).ready(function() {
+            $('#translate-button-english').click(function() {
+              $('h4').each(function() {
+                var heading = $(this);
+                var textToTranslate = heading.text();
+                var lang = 'en';
+                $.ajax({
+                  url: '/translate',
+                  type: 'POST',
+                  data: {'text': textToTranslate, 'lang': lang},
+                  success: function(response) {
+                    var translatedText = response.result; // get the translated text from the response
+                    heading.text(translatedText); // update the text of the heading with the translated text
+                  },
+                  error: function(xhr, status, error) {
+                    console.log('Error:', error);
+                  }
+                });
+              });
+            });
+          });
+        </script>
+
+    </div>
+
+    </div>
+
+  <div>
+    <br>
+      <h4 id="heading1" style="font-weight:bold;font-size:25px;font-family: Georgia, serif;padding-left: 20px;">Remedies </h4>
+      <h4 id="heading2" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r0']}}</b></h4>
+      <h4 id="heading3" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r1']}}</b></h4>
+      <h4 id="heading4" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r2']}}</b></h4>
+      <h4 id="heading5" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r3']}}</b></h4>
+      <h4 id="heading6" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r4']}}</b></h4>
+      <h4 id="heading7" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r5']}}</b></h4>
+      <h4 id="heading8" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r6']}}</b></h4>
+      <h4 id="heading9" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r7']}}</b></h4>
+      <h4 id="heading10" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r8']}}</b></h4>
+      <h4 id="heading11" style="color:black;font-weight:bold;font-size:20px;font-family: Georgia, serif;padding-left: 20px;padding-right: 20px;"><b>{{remedy['r9']}}</b></h4>
+  </div>
+
+
+</div>
+
+</body>
+</html>
