@@ -1,5 +1,5 @@
 from pymongo import MongoClient
-client = MongoClient("mongodb://mfrt:YfkCgmLy4CtkIycY9HrCNueXrB6gEFJEyWHt8mUTewrGCymuYp2kPQzE8XclUW4VupkhYCdosOCCACDbnH27Zw==@mfrt.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@mfrt@")
+client = MongoClient("mongodb://greeguard:qBRyT9lMzSeetzK5fh71IsxFjdEQ3F0Bx3fFDmJQLGZC23jObW9xvcMPvaKc2114kBOE4DC3oVEMACDb1fTdoA==@greeguard.mongo.cosmos.azure.com:10255/?ssl=true&retrywrites=false&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@greeguard@")
 db = client["remedies"]
 collection = db["collection1"]
 
